@@ -1,5 +1,5 @@
 import java.io.Serializable;
-public class Venta{
+public class Venta implements Serializable{
     private int id;
     private Vendedor vendedor;
     private Cliente cliente;

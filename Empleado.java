@@ -1,10 +1,10 @@
 import java.io.Serializable;
-public abstract class Empleado{
+public abstract class Empleado implements Serializable{
     private int edad;
     private String nombre;
-    private int numEmpleado;
+    private long numEmpleado;
     private String correo;
-    public Empleado(int edad, String nombre, int numEmpleado, String correo){
+    public Empleado(int edad, String nombre, long numEmpleado, String correo){
         this.edad=edad;
         this.nombre=nombre;
         this.numEmpleado=numEmpleado;
@@ -16,7 +16,7 @@ public abstract class Empleado{
     public void setNombre(String nombre){
         this.nombre=nombre;
     }
-    public void setNumEmpleado(int numEmpleado){
+    public void setNumEmpleado(long numEmpleado){
         this.numEmpleado=numEmpleado;
     }
     public int getEdad(){
@@ -25,7 +25,7 @@ public abstract class Empleado{
     public String getNombre(){
         return this.nombre;
     }
-    public int getNumEmpleado(){
+    public long getNumEmpleado(){
         return this.numEmpleado;
     }
     public void SetCorreo(String correo){

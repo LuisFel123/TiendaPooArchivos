@@ -1,5 +1,5 @@
 import java.io.Serializable;
-public class Proveedor{
+public class Proveedor implements Serializable{
     private String nombre;
     private String distrito;
     public Proveedor(String nombre,String distrito){

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;    
 import java.util.List;
+import java.util.ArrayList;
 
 public class DiaVenta{
     public static void main(String[]args) throws ObjetoNoEncontradoException {
@@ -16,8 +17,9 @@ public class DiaVenta{
         ArchivoClientes archivoClientes = new ArchivoClientes();
         ArchivoEmpleados archivoEmpleados = new ArchivoEmpleados();
         ArchivoProveedor archivoProveedor = new ArchivoProveedor(); 
-        ArchivoVenta archivoVenta = new ArchivoVenta();
-        ArchivoCompra archivoCompra = new ArchivoCompra();  
+        ArchivoVenta archivoVenta =  new ArchivoVenta();
+        //ArchivoVenta archivoVenta = new ArchivoVenta();
+        //ArchivoCompra archivoCompra = new ArchivoCompra();  
         do{
             try{
             System.out.println("Bienvenido a Jugueteria Coco");
@@ -437,37 +439,53 @@ public class DiaVenta{
                                                     }
                                                     break;
                                                 case 2:
-                                                    try{
-                                                        System.out.println("----------Seleccionaste buscar Clientes.----------");
-                                                        if(clientes.estaVacio()==false){
-                                                            System.out.println("Mostrando requisitos para buscar un Cliente");
+                                                    try {
+                                                            System.out.println("----------Seleccionaste buscar Clientes.----------");
+                                                            if (archivoClientes.listarObjetos("clientes.data").isEmpty()) {
+                                                                System.out.println("No existen clientes disponibles");
+                                                            } else {
+                                                                System.out.println("Mostrando requisitos para buscar un Cliente");
+                                                                sc.nextLine();
+                                                                System.out.println("Por favor ingresa el nombre del cliente que deseas buscar:");
+                                                                String buscadorC = sc.nextLine();
+                                                                List<Cliente> listaClientes  = new ArrayList<>();
+                                                                
+                                                                listaClientes=archivoClientes.buscarClientePorNombre("clientes.data",buscadorC);
+                                                                
+                                                                
+                                                                
+                                                                for(Cliente cliente: listaClientes){
+                                                                    System.out.println("---Datos del cliente---");
+                                                                    System.out.println(cliente.getNombre());
+                                                                    System.out.println(cliente.getEdad());
+                                                                }
+                                                                
+                                                                if (buscadorC.length() < 3) {
+                                                                    throw new ACMilanException("El nombre debe tener al menos 3 letras.");
+                                                                }
+                                                        
+                                                                
+                                                            }
+                                                        } catch (ACMilanException menorT) {
+                                                            System.out.println("nombre menor a tres letras");
+                                                            menorT.printStackTrace();
                                                             sc.nextLine();
-                                                            System.out.println("Por favor ingresa el nombre del cliente que deseas buscar:");
-                                                            String buscadorC=sc.nextLine();
-                                                            if(buscadorC.length()<3){
-                                                                throw new ACMilanException("");
-                                                              }
-                                                            System.out.println("Mostrando información");
-                                                            if(clientes.buscarCliente(buscadorC)!=null)
-                                                            clientes.mostrarInformacionCli();
-                                                            else
-                                                            System.out.println("No se encontró al cliente.");
-                                                        } else
-                                                            System.out.println("Tu lista de Clientes esta vacía");
-                                                    }catch(ACMilanException menorT){
-                                                        System.out.println("nombre menor a tres letras");
-                                                        menorT.printStackTrace();
-                                                        sc.nextLine();
-                                                    }
+                                                        }
                                                         break;
                                                 case 3:
+                                                    int cliMem;
                                                     System.out.println("Seleccionaste agregar Cliente.");        
                                                                 try{
                                                                 System.out.println("Elegiste agregar cliente.");
                                                                 System.out.println("Mostrando requisitos para agregar Cliente ");
+                                                                try{
                                                                 System.out.println("Ingresa la cantidad de Cliente que quieres agregar:");
-                                                                int cliMem=sc.nextInt();
+                                                                 cliMem=sc.nextInt();
                                                                 sc.nextLine();
+                                                            }catch(Exception ex){
+                                                                System.out.println("La cantidad debe ser un número entero");
+                                                                cliMem=-1;
+                                                            }
                                                                 for(int q=0;q<cliMem;q++){
                                                                   System.out.println("Ingrese el nombre del Cliente");
                                                                   String nombre=sc.nextLine();
@@ -529,36 +547,55 @@ public class DiaVenta{
                                         }    
                                         switch(rayo){
                                                 case 1:
+                                                    try{
                                                     System.out.println("Seleccionaste Listar Proveedores.");
-                                                    if(distribuidor.estaVacio()==false){
-                                                        System.out.println("Mostrando lista Proveedores.");
-                                                        distribuidor.listarProveedor();
-                                                    }else
-                                                        System.out.println("lista de Proveedores está vacía");
+                                                    List <Proveedor> proveedores =  new ArrayList<>();
+                                                    proveedores=archivoProveedor.listarObjetos("proveedor.data");
+                                                    if(proveedores.isEmpty()){
+                                                    System.out.println("No se encuentra ningun proveedor");
+                                                    }else{
+                                                        for(Proveedor proveedor: proveedores){
+                                                        System.out.println("-----Mostrando proveedor----");
+                                                        System.out.println("Nombre: "+proveedor.getNombre());
+                                                        System.out.println("Distrito: "+proveedor.getDistrito());
+                                                        }
+                                                    }
+                                                    }catch(Exception ex){
+                                                        System.out.println(ex);
+                                                    }
                                                     break;
                                                 case 2:
-                                                    try{
-                                                        System.out.println("Seleccionaste buscar Proveedores.");
-                                                        if(distribuidor.estaVacio()==false){
-                                                        System.out.println("Mostrando requisitos para buscar un Proveedor");
-                                                        sc.nextLine();
-                                                        System.out.println("Por favor ingresa el nombre del proveedor que deseas buscar:");
-                                                        String buscadorP=sc.nextLine();
-                                                        if(buscadorP.length()<3){
-                                                                        throw new ACMilanException("");
-                                                                    }
-                                                        System.out.println("Mostrando información");
-                                                        if(distribuidor.buscarProveedor(buscadorP)!=null)
-                                                            distribuidor.mostrarInformacionP();
-                                                            else
-                                                            System.out.println("No se encontró al Proveedor.");
-                                                            } else
-                                                        System.out.println("Tu lista de Proveedores esta vacía");
-                                                    }catch(ACMilanException menorT){
+                                                    try {
+                                                            System.out.println("----------Seleccionaste buscar Proveedores.----------");
+                                                            if (archivoProveedor.listarObjetos("proveedor.data").isEmpty()) {
+                                                                System.out.println("No existen proveedores disponibles");
+                                                            } else {
+                                                                System.out.println("Mostrando requisitos para buscar un Proveedor");
+                                                                System.out.println("Por favor ingresa el nombre del proovedor que deseas buscar:");
+                                                                String buscadorC = sc.nextLine();
+                                                                List<Proveedor> listaProveedores  = new ArrayList<>();
+                                                                
+                                                                listaProveedores=archivoProveedor.buscarProveedoresPorNombre("proveedor.data",buscadorC);
+                                                                
+                                                                
+                                                                
+                                                                for(Proveedor provedor: listaProveedores){
+                                                                    System.out.println("---Datos del Proveedor---");
+                                                                    System.out.println(provedor.getNombre());
+                                                                    System.out.println(provedor.getDistrito());
+                                                                }
+                                                                
+                                                                if (buscadorC.length() < 3) {
+                                                                    throw new ACMilanException("El nombre debe tener al menos 3 letras.");
+                                                                }
+                                                        
+                                                                
+                                                            }
+                                                        } catch (ACMilanException menorT) {
                                                             System.out.println("nombre menor a tres letras");
                                                             menorT.printStackTrace();
                                                             sc.nextLine();
-                                                    }
+                                                        }
                                                         break;
                                                 case 3:
                                                     try{
@@ -588,13 +625,8 @@ public class DiaVenta{
                                                 }
                                                     break;
                                                 case 4:
-                                                    System.out.println("Seleccionaste eliminar último Proveedor.");
-                                                    if(distribuidor.estaVacio()==false){
-                                                        System.out.println("Intentando eliminar al último Proveedor...");
-                                                        distribuidor.eliminarProveedor();
-                                                        System.out.println("Proveedor eliminado satisfactoriamente.");
-                                                    }else
-                                                        System.out.println("No hay proveedores que eliminar");
+                                                    System.out.println("Seleccionaste eliminar último Proveedor Agregado.");
+                                                    archivoProveedor.eliminarUltimoProveedor("proveedor.data");
                                                     break;
                                                 case 5:
                                                     break;
@@ -719,29 +751,60 @@ public class DiaVenta{
                                             case 1:
                                                 System.out.println("Seleccionaste: Listar Empleados");
                                                 System.out.println("Mostrando la lista de Empleados");
-                                                empleados.listarEmpleados();
+                                                
+                                                List<Empleado> empleadosDos = new ArrayList<>();
+                                                empleadosDos = archivoEmpleados.listarObjetos("empleado.data");
+                                                if(!empleadosDos.isEmpty()){
+                                                for (Empleado empleado : empleadosDos) {
+                                                    System.out.println("=================================");
+                                                    System.out.println("Nombre: " + empleado.getNombre());
+                                                    System.out.println("Edad: " + empleado.getEdad());
+                                                    System.out.println("Número de Empleado: " + empleado.getNumEmpleado());
+                                                    System.out.println("Correo: " + empleado.getCorreo());
+                                                    }
+                                                }else{
+                                                    System.out.println("No existen empleados");
+                                                }
                                                 break;
                                             case 2:
-                                                try{
+                                                try {
                                                     sc.nextLine();
                                                     System.out.println("---------Seleccionaste: Buscar Empleados----------");
-                                                    if(empleados.estaVacio()==false){
+                                                
+                                                    List<Empleado> lista = archivoEmpleados.listarObjetos("empleado.data");
+                                                
+                                                    if (!lista.isEmpty()) {
                                                         System.out.println("Ingresa el nombre del empleado que deseas buscar:");
-                                                        String empleadoB=sc.nextLine();
-                                                        if(empleadoB.length()<3){
-                                                             throw new ACMilanException("");
-                                                             }
-                                                        if(empleados.buscarEmpleado(empleadoB)!=null){
-                                                            empleados.mostrarInformacionEmp();
-                                                        }else
-                                                            System.out.println("No se pudo encontrar al empleado");
-                                                    }else
-                                                        System.out.println("No se hay empleados");
-                                                }catch(ACMilanException menorT){
-                                                            System.out.println("nombre menor a tres letras");
-                                                            menorT.printStackTrace();
-                                                            sc.nextLine();
+                                                        String empleadoB = sc.nextLine();
+                                                
+                                                        if (empleadoB.length() < 3) {
+                                                            throw new ACMilanException("El nombre debe tener al menos 3 letras.");
+                                                        }
+                                                
+                                                        List<Empleado> encontrados = archivoEmpleados.buscarEmpleadoPorNombre("empleado.data", empleadoB);
+                                                
+                                                        if (!encontrados.isEmpty()) {
+                                                            System.out.println("Empleados encontrados:");
+                                                            for (Empleado e : encontrados) {
+                                                                System.out.println("==========================");
+                                                                System.out.println("Nombre: " + e.getNombre());
+                                                                System.out.println("Edad: " + e.getEdad());
+                                                                System.out.println("Número de Empleado: " + e.getNumEmpleado());
+                                                                System.out.println("Correo: " + e.getCorreo());
+                                                            }
+                                                        } else {
+                                                            System.out.println("No se pudo encontrar al empleado.");
+                                                        }
+                                                    } else {
+                                                        System.out.println("No hay empleados.");
+                                                    }
+                                                
+                                                } catch (ACMilanException menorT) {
+                                                    System.out.println("Nombre menor a tres letras.");
+                                                    menorT.printStackTrace();
+                                                    sc.nextLine();
                                                 }
+
                                                 break;
                                             case 3:
                                                 System.out.println("Seleccionaste: agregar un empleado");
@@ -780,19 +843,22 @@ public class DiaVenta{
                                                                     }
                                                                 System.out.println("Ingresa los años de experiencia del empleado");
                                                                 int xpPublicidad=sc.nextInt();
+                                                                sc.nextLine();
                                                                 System.out.println("Ingresa el suledo del empleado");
                                                                 double sueldoPublicidad=sc.nextDouble();
+                                                                sc.nextLine();
                                                                 System.out.println("Ingresa los días que trabajará el empleado");
                                                                 int diasPublicidad=sc.nextInt();
+                                                                sc.nextLine();
                                                                 System.out.println("Ingresa el número de empleado");
-                                                                int numEmpMark=sc.nextInt();
+                                                                long numEmpMark=sc.nextLong();
                                                                 sc.nextLine();
                                                                 System.out.println("Ingresa el correo del empleado");
                                                                 String correo=sc.nextLine();
                                                                 if(!correo.contains("@")||!correo.contains(".com"))
                                                                     throw new ErrorCorreoException("Error corre invalido, intente de nuevo");
-                                                                Publicidad empPublicidad=new Publicidad(sueldoPublicidad,diasPublicidad,xpPublicidad,edadPublicidad,nombrePubli,numEmpMark,correo);
-                                                                empleados.agregarEmpleado(empPublicidad);
+                                                                Empleado empPublicidad=new Publicidad(sueldoPublicidad,diasPublicidad,xpPublicidad,edadPublicidad,nombrePubli,numEmpMark,correo);
+                                                                //empleados.agregarEmpleado(empPublicidad);
                                                                 archivoEmpleados.escribirOAgregar("empleado.data",empPublicidad);
                                                             }  
                                                         }catch(ACMilanException menorT){
@@ -832,14 +898,14 @@ public class DiaVenta{
                                                                 System.out.println("Ingresa los días que trabajará el empleado");
                                                                 int diasRH=sc.nextInt();
                                                                 System.out.println("Ingresa el número de empleado"+(m+1)+".");
-                                                                int numEmpRH=sc.nextInt();
+                                                                long numEmpRH=sc.nextLong();
                                                                 sc.nextLine();
                                                                 System.out.println("Ingresa el nombre del empleado"+(m+1)+".");
                                                                 String correo=sc.nextLine();
                                                                 if(!correo.contains("@")||!correo.contains(".com"))
                                                                     throw new ErrorCorreoException("Error corre invalido, intente de nuevo");
-                                                                RecursosHumanos empleadoR=new RecursosHumanos(sueldoRH,diasRH,tieneTitulo,edadRecursos,nombreRecursos,numEmpRH,correo);
-                                                                empleados.agregarEmpleado(empleadoR);
+                                                                Empleado empleadoR=new RecursosHumanos(sueldoRH,diasRH,tieneTitulo,edadRecursos,nombreRecursos,numEmpRH,correo);
+                                                                //empleados.agregarEmpleado(empleadoR);
                                                                 archivoEmpleados.escribirOAgregar("empleado.data",empleadoR);
                                                             }
                                                         }catch(ACMilanException menorT){
@@ -876,14 +942,14 @@ public class DiaVenta{
                                                                 System.out.println("Ingresa los días que trabajará el empleado"+(m+1)+".");
                                                                 int diasVen=sc.nextInt();
                                                                 System.out.println("Ingresa el número de empleado"+(m+1)+".");
-                                                                int numeroEmpVen=sc.nextInt();
+                                                                long numeroEmpVen=sc.nextLong();
                                                                 sc.nextLine();
                                                                 System.out.println("Ingresa el correo del empleado"+(m+1)+".");
                                                                 String correo=sc.nextLine();
                                                                 if(!correo.contains("@")||!correo.contains(".com"))
                                                                     throw new ErrorCorreoException("Error corre invalido, intente de nuevo");
-                                                                Vendedor empGinko=new Vendedor(sueldoVen,diasVen,numeroCaja,edadVendedor,nombreVenta,numeroEmpVen,correo);
-                                                                empleados.agregarEmpleado(empGinko);
+                                                                Empleado empGinko=new Vendedor(sueldoVen,diasVen,numeroCaja,edadVendedor,nombreVenta,numeroEmpVen,correo);
+                                                                //empleados.agregarEmpleado(empGinko);
                                                                 archivoEmpleados.escribirOAgregar("empleado.data",empGinko);
                                                             }
                                                         }catch(ACMilanException menorT){
@@ -923,14 +989,14 @@ public class DiaVenta{
                                                                 System.out.println("Ingresa los días que trabajará el empleado");
                                                                 int diasAlma=sc.nextInt();
                                                                 System.out.println("Ingresa el número de empleado");
-                                                                int numEmpAlma=sc.nextInt();
+                                                                long numEmpAlma=sc.nextLong();
                                                                 sc.nextLine();
                                                                 System.out.println("Ingresa el correo del empleado");
                                                                 String correo=sc.nextLine();
                                                                 if(!correo.contains("@")||!correo.contains(".com"))
                                                                     throw new ErrorCorreoException("Error corre invalido, intente de nuevo");
-                                                                EmpleadoAlmacen empAl=new EmpleadoAlmacen(sueldoAlma,diasAlma,montaCarga,edadAlmacen,nombreAlma,numEmpAlma,correo);
-                                                                empleados.agregarEmpleado(empAl);
+                                                                Empleado empAl=new EmpleadoAlmacen(sueldoAlma,diasAlma,montaCarga,edadAlmacen,nombreAlma,numEmpAlma,correo);
+                                                               // empleados.agregarEmpleado(empAl);
                                                                 archivoEmpleados.escribirOAgregar("empleado.data",empAl);
                                                             }
                                                         }catch(ACMilanException menorT){
@@ -966,14 +1032,14 @@ public class DiaVenta{
                                                                     System.out.println("Ingresa los días que trabajará el empleado");
                                                                     int diasDev=sc.nextInt();
                                                                     System.out.println("Ingresa el número de empleado");
-                                                                    int numEmpDev=sc.nextInt();
+                                                                    long numEmpDev=sc.nextLong();
                                                                     sc.nextLine();
                                                                     System.out.println("Ingresa el correo del empleado");
                                                                     String correo=sc.nextLine();
                                                                     if(!correo.contains("@")||!correo.contains(".com"))
                                                                     throw new ErrorCorreoException("Error corre invalido, intente de nuevo");
-                                                                    Desarrollador goku=new Desarrollador(sueldoDev,diasDev,languages,edadDesarrollador,nombreDesa,numEmpDev,correo);
-                                                                    empleados.agregarEmpleado(goku);
+                                                                    Empleado goku=new Desarrollador(sueldoDev,diasDev,languages,edadDesarrollador,nombreDesa,numEmpDev,correo);
+                                                                    //empleados.agregarEmpleado(goku);
                                                                     archivoEmpleados.escribirOAgregar("empleado.data",goku);
                                                                 }
                                                             }catch(ACMilanException menorT){
@@ -1201,8 +1267,9 @@ public class DiaVenta{
                                             detalleVenta[i]=details;
                                             cristiano.setExistencia(cristiano.getExistencia()-cantidadDul);
                                             }
-                                        Venta ventita=new Venta(id, seller, comprador, detalleVenta);
+                                        Venta ventita = new Venta(id, seller, comprador, detalleVenta);
                                         listaDeVentas.agregarVenta(ventita);
+                                        archivoVenta.escribirOAgregarVenta("ventas.data", ventita);
                                     }catch(ACMilanException menorT){
                                              System.out.println("nombre menor a tres letras");
                                              menorT.printStackTrace();

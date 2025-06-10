@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=Vendedor
 comment1.params=sueldoPorDia\ diasTrabajados\ numCaja\ edad\ nombre\ numEmpleado\ correo
-comment1.target=Vendedor(double,\ int,\ int,\ int,\ java.lang.String,\ int,\ java.lang.String)
+comment1.target=Vendedor(double,\ int,\ int,\ int,\ java.lang.String,\ long,\ java.lang.String)
 comment2.params=sueldoPorDia
 comment2.target=void\ setSueldoPorDia(double)
 comment3.params=

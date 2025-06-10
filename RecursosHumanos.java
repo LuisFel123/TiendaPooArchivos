@@ -2,7 +2,7 @@ public class RecursosHumanos extends Empleado{
     private double sueldoPorDia;
     private int diasTrabajados;
     private boolean titulo;
-    public RecursosHumanos(double sueldoPorDia, int diasTrabajados,boolean titulo, int edad, String nombre, int numEmpleado,String correo){
+    public RecursosHumanos(double sueldoPorDia, int diasTrabajados,boolean titulo, int edad, String nombre, long numEmpleado,String correo){
         super(edad, nombre, numEmpleado,correo);
         this.sueldoPorDia=sueldoPorDia;
         this.diasTrabajados=diasTrabajados;

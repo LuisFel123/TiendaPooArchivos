@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=RecursosHumanos
 comment1.params=sueldoPorDia\ diasTrabajados\ titulo\ edad\ nombre\ numEmpleado\ correo
-comment1.target=RecursosHumanos(double,\ int,\ boolean,\ int,\ java.lang.String,\ int,\ java.lang.String)
+comment1.target=RecursosHumanos(double,\ int,\ boolean,\ int,\ java.lang.String,\ long,\ java.lang.String)
 comment2.params=sueldoPorDia
 comment2.target=void\ setSueldoPorDia(double)
 comment3.params=

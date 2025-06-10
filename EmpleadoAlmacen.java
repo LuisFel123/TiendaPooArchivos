@@ -2,7 +2,7 @@ public class EmpleadoAlmacen extends Empleado{
     private double sueldoPorDia;
     private int diasTrabajados;
     private boolean montaCargas;
-    public EmpleadoAlmacen(double sueldoPorDia, int diasTrabajados,boolean montaCargas, int edad, String nombre, int numEmpleado,String correo){
+    public EmpleadoAlmacen(double sueldoPorDia, int diasTrabajados,boolean montaCargas, int edad, String nombre, long numEmpleado,String correo){
         super(edad, nombre, numEmpleado,correo);
         this.sueldoPorDia=sueldoPorDia;
         this.diasTrabajados=diasTrabajados;

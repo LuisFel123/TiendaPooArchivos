@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Canica
+comment1.params=cantidadB\ tama\u00F1o\ nombre\ color\ precio\ marca\ existencia
+comment1.target=Canica(int,\ int,\ java.lang.String,\ java.lang.String,\ int,\ java.lang.String,\ int)
+comment2.params=cantidadB
+comment2.target=void\ setCantidadB(int)
+comment3.params=
+comment3.target=int\ getCantidadB()
+comment4.params=tama\u00F1o
+comment4.target=void\ setTama\u00F1o(int)
+comment5.params=
+comment5.target=int\ getTama\u00F1o()
+numComments=6

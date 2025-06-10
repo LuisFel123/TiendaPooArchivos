@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Compra
+comment1.params=id\ proveedor\ compras\ empAlma
+comment1.target=Compra(int,\ Proveedor,\ DetalleCompra[],\ EmpleadoAlmacen)
+comment10.params=
+comment10.target=int\ goat()
+comment2.params=id
+comment2.target=void\ setId(int)
+comment3.params=
+comment3.target=int\ getId()
+comment4.params=proveedor
+comment4.target=void\ setProveedor(Proveedor)
+comment5.params=
+comment5.target=Proveedor\ getProveedor()
+comment6.params=lol
+comment6.target=void\ setCompras(DetalleCompra[])
+comment7.params=
+comment7.target=DetalleCompra[]\ getCompras()
+comment8.params=empAlma
+comment8.target=void\ setEmpleadoAlmacen(EmpleadoAlmacen)
+comment9.params=
+comment9.target=EmpleadoAlmacen\ getEmpAlma()
+numComments=11

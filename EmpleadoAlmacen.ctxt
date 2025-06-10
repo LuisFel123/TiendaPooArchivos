@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=EmpleadoAlmacen
+comment1.params=sueldoPorDia\ diasTrabajados\ montaCargas\ edad\ nombre\ numEmpleado\ correo
+comment1.target=EmpleadoAlmacen(double,\ int,\ boolean,\ int,\ java.lang.String,\ int,\ java.lang.String)
+comment2.params=sueldoPorDia
+comment2.target=void\ setSueldoPorDia(double)
+comment3.params=
+comment3.target=double\ getSueldoPorDia()
+comment4.params=diasTrabajados
+comment4.target=void\ setDiasTrabajados(int)
+comment5.params=
+comment5.target=int\ getDiasTrabajados()
+comment6.params=montaCargas
+comment6.target=void\ setMontacargas(boolean)
+comment7.params=
+comment7.target=boolean\ getMontaCargas()
+comment8.params=
+comment8.target=double\ calcularSueldo()
+numComments=9

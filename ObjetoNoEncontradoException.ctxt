@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=ObjetoNoEncontradoException
+comment1.params=msg
+comment1.target=ObjetoNoEncontradoException(java.lang.String)
+numComments=2

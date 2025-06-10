@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=ArchivoClientes
+comment1.params=nombreArchivo\ cliente
+comment1.target=void\ escribirOAgregar(java.lang.String,\ Cliente)
+comment2.params=nombreArchivo
+comment2.target=java.util.List\ listarObjetos(java.lang.String)
+comment3.params=nombreArchivo\ nombreBuscado
+comment3.target=java.util.List\ buscarClientePorNombre(java.lang.String,\ java.lang.String)
+comment4.params=nombreArchivo\ cliente
+comment4.target=void\ sobrescribirArchivo(java.lang.String,\ java.util.List)
+comment5.params=nombreArchivo
+comment5.target=void\ eliminarUltimoProducto(java.lang.String)
+numComments=6

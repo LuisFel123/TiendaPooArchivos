@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Proveedor
+comment1.params=nombre\ distrito
+comment1.target=Proveedor(java.lang.String,\ java.lang.String)
+comment2.params=nombre
+comment2.target=void\ setNombre(java.lang.String)
+comment3.params=
+comment3.target=java.lang.String\ getNombre()
+comment4.params=
+comment4.target=void\ setDistrito()
+comment5.params=
+comment5.target=java.lang.String\ getDistrito()
+numComments=6

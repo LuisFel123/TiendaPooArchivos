@@ -43,6 +43,16 @@ public abstract class Juguete implements Serializable {
         return this.existencia;
     }
     
+@Override
+public String toString() {
+    return "Juguete{" +
+           "nombre='" + nombre + '\'' +
+           ", color='" + color + '\'' +
+           ", precio=" + precio +
+           ", marca='" + marca + '\'' +
+           ", existencia=" + existencia +
+           '}';
+}
 
     
    

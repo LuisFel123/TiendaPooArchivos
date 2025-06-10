@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.InputMismatchException;    
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class DiaVenta{
     public static void main(String[]args) throws ObjetoNoEncontradoException {
@@ -158,6 +160,7 @@ public class DiaVenta{
                                                           boolean deporte=false;
                                                           if(freezed.equalsIgnoreCase("si"))
                                                             deporte=true;
+                                                        sc.nextLine();
                                                           System.out.println("Ingresa la marca de tu pelota");
                                                           String marca=sc.nextLine();
                                                           
@@ -172,7 +175,7 @@ public class DiaVenta{
                                                           int existencia=sc.nextInt();
                                                           sc.nextLine();
                                                          Pelota prime = new Pelota(deporte, material, tamaño, nombre, color, precio, marca, existencia);
-                                                          mostrador.agregarJuguete(prime);
+                                                          //mostrador.agregarJuguete(prime);
                                                           archivo.escribirOAgregar("productos.dat",prime);
                                                           }catch(Exception exception){
                                                             System.out.println("usted puso un numero o letra donde no debia, intente de nuevo");
@@ -649,11 +652,22 @@ public class DiaVenta{
                                         switch(opcionVentas){
                                             case 1:
                                                 System.out.println("Seleccionaste Listar ventas.");
-                                                if(listaDeVentas.estaVacio()==false){
-                                                    System.out.println("Mostrando lista Ventas");
-                                                    listaDeVentas.listarVenta();
+                                                List<Venta> ventas =  new ArrayList<>();
+                                                ventas= archivoVenta.listarObjetos("ventas.data");
+                                                if(ventas.isEmpty()){
+                                                    System.out.println("No hay ventas para mostrar");
+                                                   
                                                 }else
-                                                    System.out.println("No hay ventas que listar");
+                                                    for(Venta ventita : ventas){
+                                                        System.out.println("Mostrando la venta");
+                                                        System.out.println("Id: "+ventita.getId());
+                                                        System.out.println("Vendedor: "+ventita.getVendedor().toString());
+                                                        System.out.println("Cliente: "+ventita.getCliente().toString());
+                                                        System.out.println("Detalle de venta: " + Arrays.toString(ventita.getVentas()));
+
+
+
+                                                    }
                                                 break;
                                             case 2:
                                                 try{
@@ -1228,44 +1242,68 @@ public class DiaVenta{
                                         int id=sc.nextInt();
                                         sc.nextLine();
                                         System.out.println("Ingresa el nombre del Vendedor:");
-                                        String nombreVen=sc.nextLine();
-                                        if(nombreVen.length()<3){
-                                            throw new ACMilanException("");
-                                          }
-                                        Vendedor seller=(Vendedor)empleados.buscarEmpleado(nombreVen);
+                                        String nombreVen = sc.nextLine();
+                                        if (nombreVen.length() < 3) {
+                                            throw new ACMilanException("Nombre de vendedor demasiado corto");
+                                        }
+                                        
+                                        List<Empleado> coincidencias = archivoEmpleados.buscarEmpleadoPorNombre("empleado.data", nombreVen);
+                                        if (coincidencias.isEmpty()) {
+                                            throw new Exception("No se encontró ningún empleado con ese nombre");
+                                        }
+                                        
+                                        Empleado empleado = coincidencias.get(0);
+                                        if (!(empleado instanceof Vendedor)) {
+                                            throw new Exception("El empleado encontrado no es un Vendedor");
+                                        }
+                                        
+                                        Vendedor seller = (Vendedor) empleado;
+                                        
                                         System.out.println("Ingresa el nombre del Cliente:");
-                                        String nombreCli=sc.nextLine();
-                                        if(nombreCli.length()<3){
-                                              throw new ACMilanException("");
-                                                  }
-                                        Cliente comprador=clientes.buscarCliente(nombreCli);
+                                        String nombreCli = sc.nextLine();
+                                        
+                                        if (nombreCli.length() < 3) {
+                                            throw new ACMilanException("Nombre de cliente demasiado corto");
+                                        }
+                                        
+                                        List<Cliente> encontrados = archivoClientes.buscarClientePorNombre("clientes.data", nombreCli);
+                                        if (encontrados.isEmpty()) {
+                                            throw new Exception("No se encontró ningún cliente con ese nombre");
+                                        }
+                                        
+                                        // Obtener el último cliente coincidente
+                                        Cliente comprador = encontrados.get(encontrados.size() - 1);
+
+                                        
+                                        
                                         System.out.println("¿Cuántos productos se vendieron?");
                                         int cantidadDulcesitos=sc.nextInt();
                                         DetalleVenta[] detalleVenta=new DetalleVenta[cantidadDulcesitos];
                                         for(int i=0; i<cantidadDulcesitos;i++){
                                             sc.nextLine();
-                                            System.out.println("Ingrese la marca del producto "+(i+1)+":");
+                                            System.out.println("Ingrese el nombre del producto "+(i+1)+":");
                                             String duls=sc.nextLine();
-                                            Juguete cristino = mostrador.buscar(duls);
-                                          if (duls ==null){
-                                                System.out.println("no se encontro el juguete");
+                                                List<Juguete> encontradosdos = archivo.buscarProductosPorNombre("productos.dat", duls);
+    
+                                                if (encontradosdos.isEmpty()) {
+                                                    throw new Exception("No se encontró ningún producto con ese nombre");
                                                 }
-                                            if(duls.length()<3){
-                                            throw new ACMilanException("");
-                                          }
+                                                
+                                                Juguete ultimo = encontradosdos.get(encontradosdos.size() - 1);
+                                              
                                           
-                                          Juguete cristiano=mostrador.buscar(duls);
                                             System.out.println("Ingrese la cantidad vendida:");
                                             int cantidadDul=sc.nextInt();
                                             if(cantidadDul < 1 ){
                                                 throw new Exception("Juguetes negativos");
                                             }
-                                            if(cristiano.getExistencia() <  cantidadDul){
+                                            if(ultimo.getExistencia() <  cantidadDul){
                                                 throw new Exception("Existencia minima");
                                             }
-                                            DetalleVenta details=new DetalleVenta(cantidadDul, cristiano);
+                                            DetalleVenta details=new DetalleVenta(cantidadDul, ultimo);
                                             detalleVenta[i]=details;
-                                            cristiano.setExistencia(cristiano.getExistencia()-cantidadDul);
+                                            ultimo.setExistencia(ultimo.getExistencia()-cantidadDul);
+                                            archivo.actualizarProductoExistenciaPorNombre("productos.dat",ultimo);
                                             }
                                         Venta ventita = new Venta(id, seller, comprador, detalleVenta);
                                         listaDeVentas.agregarVenta(ventita);
@@ -1276,6 +1314,7 @@ public class DiaVenta{
                                              sc.nextLine();
                                     }catch(Exception exception){ 
                                         System.out.println("Error,intentelo de nuevo");
+                                        System.out.println(exception);
                                     }
                                         break;
                                     case 4:

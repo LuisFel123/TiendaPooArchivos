@@ -3,4 +3,6 @@ comment0.target=ArchivoVenta
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ ArchivoVenta\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=nombreArchivo\ venta
 comment1.target=void\ escribirOAgregarVenta(java.lang.String,\ Venta)
-numComments=2
+comment2.params=nombreArchivo
+comment2.target=java.util.List\ listarObjetos(java.lang.String)
+numComments=3

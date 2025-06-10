@@ -1,4 +1,6 @@
-public class DetalleVenta{
+import java.io.Serializable;
+
+public class DetalleVenta implements Serializable{
     private int cantidad;
     private Juguete juguetes;
     public DetalleVenta(int cantidad, Juguete juguetes){
@@ -17,4 +19,12 @@ public class DetalleVenta{
     public Juguete getJuguetes(){
         return this.juguetes;
     }
+    
+    @Override
+public String toString() {
+    return "DetalleVenta{" +
+           "cantidad=" + cantidad +
+           ", juguete=" + juguetes +
+           '}';
+}
 }

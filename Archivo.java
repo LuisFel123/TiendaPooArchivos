@@ -146,6 +146,35 @@ public class Archivo
 }
 
 
+public void actualizarProductoExistenciaPorNombre(String nombreArchivo, Juguete productoActualizado) {
+    List<Juguete> lista = listarObjetos(nombreArchivo);
+
+    if (lista.isEmpty()) {
+        System.out.println("No hay productos en el archivo.");
+        return;
+    }
+
+    boolean actualizado = false;
+
+    // Buscar por nombre y reemplazar el último que coincida
+    for (int i = lista.size() - 1; i >= 0; i--) {
+        Juguete j = lista.get(i);
+        if (j.getNombre().equalsIgnoreCase(productoActualizado.getNombre())) {
+            lista.set(i, productoActualizado); // reemplaza por el nuevo objeto con existencia modificada
+            actualizado = true;
+            break;
+        }
+    }
+
+    if (actualizado) {
+        sobrescribirArchivo(nombreArchivo, lista);
+        System.out.println("Existencia actualizada correctamente en archivo.");
+    } else {
+        System.out.println("No se encontró un producto con ese nombre.");
+    }
+}
+
+
 public void sobrescribirArchivo(String nombreArchivo, List<Juguete> juguetes) {
     try (FileOutputStream fileOut = new FileOutputStream(nombreArchivo);
          ObjectOutputStream out = new ObjectOutputStream(fileOut)) {

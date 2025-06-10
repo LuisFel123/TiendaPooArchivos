@@ -32,4 +32,19 @@ public class Vendedor extends Empleado{
             sueldo= this.diasTrabajados * this.sueldoPorDia;
             return sueldo;
     }
+    
+    @Override
+public String toString() {
+    return "Vendedor{" +
+           "nombre='" + getNombre() + '\'' +
+           ", edad=" + getEdad() +
+           ", numEmpleado=" + getNumEmpleado() +
+           ", correo='" + getCorreo() + '\'' +
+           ", sueldoPorDia=" + sueldoPorDia +
+           ", diasTrabajados=" + diasTrabajados +
+           ", numCaja=" + numCaja +
+           ", sueldoTotal=" + calcularSueldo() +
+           '}';
+}
+
 }

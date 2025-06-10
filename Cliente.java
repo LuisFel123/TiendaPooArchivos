@@ -18,4 +18,12 @@ public class Cliente implements Serializable{
     public String getNombre(){
         return this.nombre;
     }
+    
+    @Override
+public String toString() {
+    return "Cliente{" +
+           "nombre='" + nombre + '\'' +
+           ", edad=" + edad +
+           '}';
+}
 }

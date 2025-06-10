@@ -35,4 +35,14 @@ public abstract class Empleado implements Serializable{
         return this.correo;
     }
     public abstract double calcularSueldo();
+    @Override
+
+    public String toString() {
+    return "Empleado{" +
+           "nombre='" + nombre + '\'' +
+           ", edad=" + edad +
+           ", numEmpleado=" + numEmpleado +
+           ", correo='" + correo + '\'' +
+           '}';
+}
 }

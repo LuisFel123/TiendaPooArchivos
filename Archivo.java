@@ -222,4 +222,35 @@ public List<Juguete> buscarProductosPorNombre(String nombreArchivo, String nombr
 }
 
 
+
+
+public void actualizarProductoSumandoExistenciaDOS(String nombreArchivo, Juguete productoActualizado, int cantidadASumar) {
+    List<Juguete> lista = listarObjetos(nombreArchivo);
+
+    if (lista.isEmpty()) {
+        System.out.println("No hay productos en el archivo.");
+        return;
+    }
+
+    boolean actualizado = false;
+
+    for (int i = lista.size() - 1; i >= 0; i--) {
+        Juguete j = lista.get(i);
+        if (j.getNombre().equalsIgnoreCase(productoActualizado.getNombre())) {
+            j.setExistencia(j.getExistencia() + cantidadASumar);  // ✅ aquí se suma la existencia
+            lista.set(i, j);
+            actualizado = true;
+            break;
+        }
+    }
+
+    if (actualizado) {
+        sobrescribirArchivo(nombreArchivo, lista);
+        System.out.println("Existencia sumada correctamente en archivo.");
+    } else {
+        System.out.println("No se encontró un producto con ese nombre.");
+    }
+}
+
+
 }

@@ -16,8 +16,16 @@ import java.util.List;
  */
 public class ArchivoVenta
 {
-        public void escribirOAgregarVenta(String nombreArchivo, Venta venta) {
+public void escribirOAgregarVenta(String nombreArchivo, Venta nuevaVenta) {
     try {
+        List<Venta> ventasExistentes = listarObjetos(nombreArchivo);
+        for (Venta v : ventasExistentes) {
+            if (v.getId() == nuevaVenta.getId()) {
+                System.out.println("Ya existe una venta con ID " + nuevaVenta.getId() + ". No se agregará.");
+                return;
+            }
+        }
+
         File archivo = new File(nombreArchivo);
         boolean existe = archivo.exists();
 
@@ -30,16 +38,17 @@ public class ArchivoVenta
             out = new ObjectOutputStream(fileOut);
         }
 
-        out.writeObject(venta);
+        out.writeObject(nuevaVenta);
         out.close();
 
-        System.out.println("Venta registrada: ID " + venta.getId());
+        System.out.println("Venta registrada: ID " + nuevaVenta.getId());
 
     } catch (IOException e) {
         System.out.println("Error al escribir/agregar la venta.");
         e.printStackTrace();
     }
 }
+
 
 
 
@@ -54,7 +63,7 @@ public List<Venta> listarObjetos(String nombreArchivo) {
                     Venta juguete = (Venta) in.readObject();
                     lista.add(juguete);
                 } catch (EOFException eof) {
-                    break; // fin del archivo
+                    break; 
                 }
             }
 
@@ -66,4 +75,18 @@ public List<Venta> listarObjetos(String nombreArchivo) {
         return lista;
     }
 
+    public Venta buscarVentaPorId(String nombreArchivo, int idBuscado) {
+    List<Venta> listaVentas = listarObjetos(nombreArchivo); 
+
+    for (Venta v : listaVentas) {
+        if (v.getId() == idBuscado) {
+            return v;
+        }
+    }
+
+    return null; 
 }
+    
+    
+}
+

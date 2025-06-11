@@ -1,4 +1,6 @@
-public class ListaCompra{
+import java.io.Serializable;
+
+public class ListaCompra implements Serializable{
     private int indicador;
     private int capacidad;
     private Compra[] compras;

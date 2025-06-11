@@ -36,27 +36,28 @@ public class ArchivoProveedor
     
     
     public List<Proveedor> listarObjetos(String nombreArchivo) {
-        List<Proveedor> lista = new ArrayList<>();
+    List<Proveedor> lista = new ArrayList<>();
 
-        try (FileInputStream fileIn = new FileInputStream(nombreArchivo);
-             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+    try (FileInputStream fileIn = new FileInputStream(nombreArchivo);
+         ObjectInputStream in = new ObjectInputStream(fileIn)) {
 
-            while (true) {
-                try {
-                    Proveedor proveedor = (Proveedor) in.readObject();
-                    lista.add(proveedor);
-                } catch (EOFException eof) {
-                    break; // fin del archivo
-                }
+        while (true) {
+            try {
+                Proveedor proveedor = (Proveedor) in.readObject();
+                lista.add(proveedor);
+            } catch (EOFException eof) {
+                // Fin del archivo → salimos del while
+                break;
             }
-
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error al leer los objetos del archivo.");
-            e.printStackTrace();
         }
 
-        return lista;
+    } catch (IOException | ClassNotFoundException e) {
+        System.out.println("Error al leer los objetos del archivo.");
+        e.printStackTrace();
     }
+
+    return lista;
+}
     
     
 

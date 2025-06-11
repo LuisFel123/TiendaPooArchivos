@@ -14,4 +14,6 @@ comment6.params=nombreArchivo
 comment6.target=void\ eliminarUltimoProducto(java.lang.String)
 comment7.params=nombreArchivo\ nombreBuscado
 comment7.target=java.util.List\ buscarProductosPorNombre(java.lang.String,\ java.lang.String)
-numComments=8
+comment8.params=nombreArchivo\ productoActualizado\ cantidadASumar
+comment8.target=void\ actualizarProductoSumandoExistenciaDOS(java.lang.String,\ Juguete,\ int)
+numComments=9

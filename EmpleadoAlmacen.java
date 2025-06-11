@@ -1,4 +1,5 @@
-public class EmpleadoAlmacen extends Empleado{
+import java.io.Serializable;
+public class EmpleadoAlmacen extends Empleado implements Serializable{
     private double sueldoPorDia;
     private int diasTrabajados;
     private boolean montaCargas;

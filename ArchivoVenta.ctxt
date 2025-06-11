@@ -1,8 +1,10 @@
 #BlueJ class context
 comment0.target=ArchivoVenta
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ ArchivoVenta\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=nombreArchivo\ venta
+comment1.params=nombreArchivo\ nuevaVenta
 comment1.target=void\ escribirOAgregarVenta(java.lang.String,\ Venta)
 comment2.params=nombreArchivo
 comment2.target=java.util.List\ listarObjetos(java.lang.String)
-numComments=3
+comment3.params=nombreArchivo\ idBuscado
+comment3.target=Venta\ buscarVentaPorId(java.lang.String,\ int)
+numComments=4

@@ -1,4 +1,5 @@
-public class DetalleCompra{
+import java.io.Serializable;
+public class DetalleCompra implements Serializable{
     private int cantidad;
     private Juguete juguetes;
     public DetalleCompra(int cantidad, Juguete juguetes){

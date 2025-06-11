@@ -1,5 +1,5 @@
 import java.io.Serializable;
-public class Compra{
+public class Compra implements Serializable{
     private int id;
     private Proveedor proveedor;
     private DetalleCompra[] compras;
